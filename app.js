@@ -1,17 +1,28 @@
-const conf = require('dotenv').config
-
+// express web app instance
 const express = require('express')
 
-const app = express()
+// parse request body to json
+const body_parser = require('body-parser')
 
-const port = process.env.port || 3000
+// for File IO
+const path = require('path')
+const exp = require('constants')
 
-app.get('/', (req, res)=>{
-    return res.status(200).json({
-        message: 'Hello World!'
-    })
-})
+// for web routing 
+const web_route = require('./routes/web')
 
-app.listen(port, ()=>{
-    console.log('Server is running at port ' + port)
-})
+// make mock database (raw .json file) available globally in app
+global.mock_db = path.join(__dirname, './data/mock_db.json');
+
+const app = express();
+
+// Set the view engine for web routes
+app.set('view engine', 'pug');
+
+app.use('/css', express.static('public/css'))
+app.use('/js', express.static('public/js'))
+
+app.use('/', web_route); // web routes
+
+const port = 3000;
+app.listen(port, () => console.log(`Server is running on port ${3000}`))
