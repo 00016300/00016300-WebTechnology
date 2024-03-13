@@ -4,5 +4,8 @@ const home_controller = require('../../../controllers/web/home');
 
 // localhost:3000/ (GET request)
 router.get('/', home_controller.index);
+router.get('/add', home_controller.add);
+router.get('/update', home_controller.update);
+
 
 module.exports = router;

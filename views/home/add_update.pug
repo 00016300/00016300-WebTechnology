@@ -1,0 +1,39 @@
+include ../head.pug
+body
+    .container.mt-5
+        h1 Add/Update Product
+        form(action="/submit-event-form" method="POST")
+            .mb-3
+                label(for="productName" class="form-label") Product Name
+                input(type="text" class="form-control" id="productName" name="productName" required)
+            .mb-3
+                label(for="purchaseDateTime" class="form-label") Purchase Date/Time
+                .input-group.date(id="datetimepicker1" data-target-input="nearest")
+                    input(type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" name="purchaseDateTime" required)
+                    .input-group-append(data-target="#datetimepicker1" data-toggle="datetimepicker")
+                        .input-group-text
+                            i.fas.fa-calendar-alt
+            .mb-3
+                label(for="productsLeft" class="form-label") Products Left
+                input(type="number" min="0" step="1" class="form-control" id="productsLeft" name="productsLeft" required)
+            .mb-3
+                label(for="contactPhone" class="form-label") Contact Phone
+                input(type="tel" class="form-control" id="contactPhone" name="contactPhone" required)
+            .mb-3
+                label(for="price" class="form-label") Price
+                input(type="number" min="0" step="any" class="form-control" id="price" name="price" required)
+            button(type="submit" class="btn btn-primary") Add/Edit
+        script.
+            const picker = new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'),{
+                localization: {
+                    'locale': 'fr'
+                }
+            });
+            picker.dates.formatInput = function(date) {
+                return moment(date).format('DD/MM/YYYY HH:mm')
+            }
+
+
+
+
+
