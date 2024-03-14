@@ -11,6 +11,15 @@ const product_controller = {
             product_service.create(req, res)
         )
     },
+    update(req, res) {
+        const product = product_service.update(req.params.id, req.body)
+        
+        if (product) {
+            res.json(product)
+        } else {
+            res.status(404).send('Product not found!')
+        }
+    },
     delete(req, res) {
         const product = product_service.getById(req.params.id)
         

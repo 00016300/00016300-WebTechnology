@@ -1,61 +1,66 @@
 include ../head.pug
 body
     .container.mt-5
-      h1 Products
+      .row.d-flex.align-items-center
+        .col-md-6
+          h1 Products
+        .col-md-6.text-end
+          a.btn.btn-success(href='/add', role='button') Add      
       table.table.table-responsive.table-hover.table-striped.table-dark
         thead
-            tr
-                th(scope="col") ID
-                th(scope="col") Product Name
-                th(scope="col") Purchase DateTime
-                th(scope="col") Available
-                th(scope="col") Contact Phone
-                th(scope="col") Price ($)
-                th(scope="col") Actions
+          tr
+            th(scope="col") ID
+            th(scope="col") Product Name
+            th(scope="col") Published DateTime
+            th(scope="col") Available
+            th(scope="col") Contact Phone
+            th(scope="col") Price
+            th(scope="col") Actions
         tbody
+
 footer 
     p This web application was created to fulfill Web Technology module’s requirements and does not represent an actual company or service
 script.
-      document.addEventListener('DOMContentLoaded', function() {
-        axios.get('/api/product')
-          .then(function(response) {
-            const products = response.data;
-            const tableBody = document.querySelector('table tbody');
-            products.forEach(t => {
-                const row = document.createElement('tr');
-                const product = t.product
-                row.innerHTML = `
-                    <td>${t.id}</td>
-                    <td>${product.productName}</td>
-                    <td>${product.purchaseDateTime}</td>
-                    <td>${product.productsLeft}</td>
-                    <td>${product.contactPhone}</td>
-                    <td>${product.price}</td>
-                    <td>
-                    <button class="btn btn-primary btn-sm">Edit</button>
-                    <button class="btn btn-danger btn-sm" data-id="${t.id}">Delete</button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-          
-          // Use event delegation for delete buttons
-          document.addEventListener('click', function(event) {
-            if (event.target && event.target.classList.contains('btn-danger')) {
-              const productId = event.target.getAttribute('data-id');
-              axios.delete(`/api/product/${productId}`).then(function(response) {
-                console.log('Delete successful', response);
-                location.href = '/'
-              })
-              .catch(function(error) {
-                console.log('Error deleting ticket', error);
-              });
-            }
-          });
+  document.addEventListener('DOMContentLoaded', function() {
+    axios.get('/api/product').then(function(response) {
+      const products = response.data;
+      const tableBody = document.querySelector('table tbody');
+      products.forEach(t => {
+        const row = document.createElement('tr');
+        const product = t.product
+        row.innerHTML = `
+          <td>${t.id}</td>
+          <td>${product.productName}</td>
+          <td>${product.publishedDateTime}</td>
+          <td>${product.productsLeft}</td>
+          <td>${product.contactPhone}</td>
+          <td>${product.price}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" data-id="${t.id}" onclick="window.location.href='/update/${t.id}'">Update</button>
+            <button class="btn btn-danger btn-sm" data-id="${t.id}">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
       });
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+    // Use event delegation for delete buttons
+    document.addEventListener('click', function(event) {
+      if (event.target && event.target.classList.contains('btn-danger')) {
+        const productId = event.target.getAttribute('data-id');
+        axios.delete(`/api/product/${productId}`).then(function(response) {
+          alert('Deleted successfully!', response);
+          location.href = '/'
+        })
+        .catch(function(error) {
+          alert('Error deleting product: ' + error);
+        });
+      }
+    });
+  });
+
 
 

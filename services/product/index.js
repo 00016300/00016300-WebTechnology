@@ -27,6 +27,19 @@ const product_service = {
         
         return new_product
     },
+    update(id, updateData){
+        const productIndex = products.findIndex(t => t.id == id)
+
+        if (productIndex === -1) {
+            return null
+        }
+
+        products[productIndex].product = { ...products[productIndex].product, ...updateData }
+
+        writeToFile(products)
+        
+        return products[productIndex]
+    },
     delete(id) {
         const index = products.findIndex(u => u.id == id)
         products.splice(index, 1)    

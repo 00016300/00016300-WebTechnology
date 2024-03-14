@@ -4,19 +4,30 @@
         "product": {
             "productName": "Protain",
             "purchaseDateTime": "12/02/2024 19:00",
-            "productsLeft": 13,
-            "contactPhone": "712354440",
-            "price": 21.9
+            "productsLeft": "13",
+            "contactPhone": "+998952478354",
+            "price": "21.9",
+            "publishedDateTime": "13/03/2024 10:58"
         }
     },
     {
-        "id": "2ZyV",
+        "id": "beB4",
         "product": {
-            "productName": "Protain",
-            "purchaseDateTime": "12/02/2024 19:00",
-            "productsLeft": 13,
-            "contactPhone": "+998935108376",
-            "price": 21.9
+            "productName": "Bag",
+            "purchaseDateTime": "06/02/2025 01:18",
+            "productsLeft": "69",
+            "contactPhone": "+998952478354",
+            "price": "35"
+        }
+    },
+    {
+        "id": "EYlL",
+        "product": {
+            "productName": "shirts",
+            "publishedDateTime": "23/03/2024 11:00",
+            "productsLeft": "100",
+            "contactPhone": "+998900000000",
+            "price": "16"
         }
     }
 ]
