@@ -10,6 +10,16 @@ const product_controller = {
         res.status(201).json(
             product_service.create(req, res)
         )
+    },
+    delete(req, res) {
+        const product = product_service.getById(req.params.id)
+        
+        if (product) {
+            product_service.delete(req.params.id)
+            res.status(204).send('Product deleted successfully')
+        } else {
+            res.status(404).send('Product not found!')
+        }
     }
 }
 

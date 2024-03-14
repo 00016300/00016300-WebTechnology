@@ -1,4 +1,5 @@
 const fs = require('fs')
+
 // access global mock db file
 const products = require(global.mock_db)
 
@@ -7,6 +8,9 @@ const product_service = {
     getAll() {
         return products
     },
+    getById(id) {
+        return products.find(t => t.id == id)
+    },    
     create(req, res) {
         let new_id = genRandId(4)
                 
@@ -22,6 +26,11 @@ const product_service = {
         writeToFile(products)
         
         return new_product
+    },
+    delete(id) {
+        const index = products.findIndex(u => u.id == id)
+        products.splice(index, 1)    
+        writeToFile(products)
     }
 }
 
