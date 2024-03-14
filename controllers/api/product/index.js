@@ -5,6 +5,11 @@ const product_service = require('../../../services/product/')
 const product_controller = {
     getAll(req, res) {
         res.json(product_service.getAll())
+    },
+    create(req, res) {
+        res.status(201).json(
+            product_service.create(req, res)
+        )
     }
 }
 

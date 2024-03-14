@@ -1,18 +1,20 @@
 include ../head.pug
 body
     .container.mt-5
-      h1 List
+      h1 Products
       table.table.table-responsive.table-hover.table-striped.table-dark
         thead
             tr
                 th(scope="col") ID
                 th(scope="col") Product Name
                 th(scope="col") Purchase DateTime
-                th(scope="col") Venue
+                th(scope="col") Available
                 th(scope="col") Contact Phone
                 th(scope="col") Price ($)
                 th(scope="col") Actions
         tbody
+footer 
+    p This web application was created to fulfill Web Technology module’s requirements and does not represent an actual company or service
 script.
       document.addEventListener('DOMContentLoaded', function() {
         axios.get('/api/product')
@@ -26,7 +28,7 @@ script.
                     <td>${t.id}</td>
                     <td>${product.productName}</td>
                     <td>${product.purchaseDateTime}</td>
-                    <td>${product.venue}</td>
+                    <td>${product.productsLeft}</td>
                     <td>${product.contactPhone}</td>
                     <td>${product.price}</td>
                     <td>
